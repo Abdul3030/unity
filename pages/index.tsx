@@ -15,7 +15,7 @@ import MobileNav from '../components/MobileNav';
 
 export default function Home() {
 
-  const [collapse, setCollapse] = useState(false);
+  const [collapse, setCollapse] = useState(true);
   const [mobileMenu, setMobileMenu] = useState(false);
 
   
@@ -38,11 +38,11 @@ export default function Home() {
       </div>
       <div onClick={mobileMenuHandler} className={`fixed transition-width duration-500 ease-out overflow-y-scroll z-30 top-0 left-0 bg-gray-500 bg-opacity-50 overflow-hidden md:hidden ${mobileMenu ? 'block w-full' : 'hidden w-0' }`}>
         <div onClick={(e) => e.stopPropagation()} className={`bg-white px-1 max-h-screen ${mobileMenu ? 'w-72' : 'w-0'} h-auto overflow-scroll z-40 transition-width duration-700 ease-in-out`}>
-          <SideBar name="Tam Tran" mobileMenuClose={mobileMenuHandler} collapseHandler={mobileMenuHandler} collapse={collapse} />
+          <SideBar name="Tam Tran" mobileMenuClose={mobileMenuHandler} collapseHandler={mobileMenuHandler} linkClicked={sideBarCollapseHandler} collapse={collapse} />
         </div>
       </div>
       <div className={`hidden md:block bg-white ${collapse ? 'w-22' : 'w-80'} pt-5 px-3 overflow-hidden transition-width duration-200 ease-out`}>
-        <SideBar name="Tam Tran" collapseHandler={isTablet ? sideBarCollapseHandler : () => {return ;}} collapse={collapse} />
+        <SideBar name="Tam Tran" collapseHandler={sideBarCollapseHandler}  linkClicked={!collapse ? () => setCollapse(true) : () => {return ;}} collapse={collapse} />
       </div>
       <div className="w-full flex">
         <div className="w-full lg:w-2/3 pt-5 px-5 md:px-10 border-l">
