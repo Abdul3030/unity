@@ -9,27 +9,28 @@ type dataType = {
     pv: number,
 };
 
-const Income = () => {
-    const [tooltip, setTooltip] = useState<string>('');
-    const data:dataType[] = [
-        {
-            name: 'Oct',
-            uv: 50,
-            pv: 60,
-          },
-          {
-            name: 'Mar',
-            uv: 30,
-            pv: 40,
-          },
-          {
-            name: 'Aug',
-            uv: 10,
-            pv: 20,
-          },
+const data:dataType[] = [
+    {
+        name: 'Oct',
+        uv: 50,
+        pv: 60,
+      },
+      {
+        name: 'Mar',
+        uv: 30,
+        pv: 40,
+      },
+      {
+        name: 'Aug',
+        uv: 10,
+        pv: 20,
+      },
 ];
 
+const Income = () => {
 
+    const [tooltip, setTooltip] = useState<string>('');
+    
 return (
     <div className="w-full shadow-md rounded-3xl p-3 bg-unity-purple">
         <div className="w-full py-5">

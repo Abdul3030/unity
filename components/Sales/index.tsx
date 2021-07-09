@@ -38,6 +38,7 @@ return (
                 </svg>
                 </i>  
         </div>
+        {/* ********** Sales Items rendered ************* */}
         <div className="w-full py-5">
            {
                itemData.map(({name, subname, amount}, idx) => 
@@ -50,6 +51,7 @@ return (
                 />)
            }
         </div>
+        {/* *********** Button ************** */}
         <button className="w-full rounded-xl bg-black hover:bg-unity-purple py-5 font-medium  text-center text-white">
             <Link href="#" >
                 <a>

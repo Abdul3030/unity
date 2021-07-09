@@ -2,11 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import ProgressBar from './ProgressBar';
 
-type GoalProps = {
 
-}
-
-const  Goal = ({}: GoalProps) => {
+const  Goal = () => {
   return (
     <div className="w-full p-5 shadow-md rounded-lg">
         <h1 className="text-normal font-medium py-2">2020 Goal</h1>

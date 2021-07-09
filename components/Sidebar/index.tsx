@@ -2,12 +2,7 @@ import Image from 'next/image';
 import Item from './Item';
 import * as Ionic from 'react-icons/io5';
 
-type SidebarProps = {
-    name: string,
-    collapse: boolean,
-    collapseHandler: () => void,
-    mobileMenuClose?: () => void,
-}
+
 
 type adminDataType = {
     name: string,
@@ -26,73 +21,85 @@ type barDataType = {
     insight: insightDataType[]
 };
 
+
+const sidebarData:barDataType = {
+    admin: [
+        {
+            name: 'Overview',
+            icon: 'IoAnalytics',
+            url: '/overview',
+        },
+        {
+            name: 'Products',
+            icon: 'IoBagOutline',
+            url: '/',
+        },
+        {
+            name: 'Campaigns',
+            icon: 'IoStatsChart',
+            url: '/',
+        },
+        {
+            name: 'Schedules',
+            icon: 'IoTimerOutline',
+            url: '/',
+        },
+        {
+            name: 'Payouts',
+            icon: 'IoWalletOutline',
+            url: '#',
+        },
+        {
+            name: 'Statement',
+            icon: 'IoListCircleOutline',
+            url: '#',
+        },
+        {
+            name: 'Settings',
+            icon: 'IoSettingsOutline',
+            url: '#',
+        },
+    ],
+    insight: [
+        {
+            name: 'Inbox',
+            icon: 'IoMailOutline',
+            badge: 5,
+            url: '#',
+        },
+        {
+            name: 'Notifications',
+            icon: 'IoNotificationsOutline',
+            badge: 7,
+            url: '#',
+        },
+        {
+            name: 'Comments',
+            icon: 'IoChatbubbleEllipsesOutline',
+            badge: 3,
+            url: '#',
+        },
+    ]
+}
+
+// ********************** Sidebar Component ******************** //
+
+type SidebarProps = {
+    name: string,
+    collapse: boolean,
+    collapseHandler: () => void,
+    mobileMenuClose?: () => void,
+}
+
 const SideBar = ({collapseHandler, name, collapse, mobileMenuClose}:SidebarProps ) => {
 
     const simpleMenu = <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 7a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 13a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>;
     
-    const sidebarData:barDataType = {
-        admin: [
-            {
-                name: 'Overview',
-                icon: 'IoAnalytics',
-                url: '/overview',
-            },
-            {
-                name: 'Products',
-                icon: 'IoBagOutline',
-                url: '/',
-            },
-            {
-                name: 'Campaigns',
-                icon: 'IoStatsChart',
-                url: '/',
-            },
-            {
-                name: 'Schedules',
-                icon: 'IoTimerOutline',
-                url: '/',
-            },
-            {
-                name: 'Payouts',
-                icon: 'IoWalletOutline',
-                url: '#',
-            },
-            {
-                name: 'Statement',
-                icon: 'IoListCircleOutline',
-                url: '#',
-            },
-            {
-                name: 'Settings',
-                icon: 'IoSettingsOutline',
-                url: '#',
-            },
-        ],
-        insight: [
-            {
-                name: 'Inbox',
-                icon: 'IoMailOutline',
-                badge: 5,
-                url: '#',
-            },
-            {
-                name: 'Notifications',
-                icon: 'IoNotificationsOutline',
-                badge: 7,
-                url: '#',
-            },
-            {
-                name: 'Comments',
-                icon: 'IoChatbubbleEllipsesOutline',
-                badge: 3,
-                url: '#',
-            },
-        ]
-    }
-
     return (
         <div className={`h-full flex flex-col justify-between`}>
+
             <div className="w-full">
+                {/* ********* Sidebar Header ************ */}
                 <div className="relative w-full flex items-center p-4 md:p-3">
                     <div className={`${collapse ? 'hidden' : 'block'}`}>
                         <Image src="/logo.svg" width="176" height="47" alt="Logo"/>
@@ -104,6 +111,9 @@ const SideBar = ({collapseHandler, name, collapse, mobileMenuClose}:SidebarProps
                     <div className={`${collapse ? 'block' : 'hidden'} px-3`}>
                         <Image src="/shortlogo.png" layout="fixed" width="40" height="40" alt="Short Logo" />
                     </div>
+
+                    {/* ************ Sidebar Items of Admin part */}
+
                     <h1 className="p-5 font-medium text-base text-unity-gray flex">
                         <span className={`${collapse ? 'text-xs -ml-2' : ''}`}>Admin</span>
                         {
@@ -115,7 +125,11 @@ const SideBar = ({collapseHandler, name, collapse, mobileMenuClose}:SidebarProps
                             sidebarData.admin.map(({name, url, icon}, idx) => <Item key={idx} clicked={collapseHandler} show={!collapse} url={url} icon={icon} name={name} />)
                         }
                     </div>
+
+                    {/* *********** Sidebar Items of insight part */}
+
                     <h1 className="px-5 pt-10 pb-5 font-medium text-unity-gray text-base"><span className={`${collapse ? 'text-xs -ml-3' : ''}`}>Insights</span></h1>
+                    
                     <div className="w-full">
                         {
                             sidebarData.insight.map(({name, url, icon, badge}, idx) => <Item key={idx} clicked={collapseHandler} show={!collapse} url={url} icon={icon} name={name} badge={badge} />)
@@ -123,6 +137,7 @@ const SideBar = ({collapseHandler, name, collapse, mobileMenuClose}:SidebarProps
                     </div>
                 </div>
             </div>
+            {/* *********** Sidebar Footer **************** */}
             <div className="w-full mt-10">
                 <div className={`${collapse ? 'hidden' : 'block'} z-0 relative parent-shadow flex justify-center w-full bg-unity-lightpurple rounded-2xl mb-10`}>
                     <div className="w-full">
