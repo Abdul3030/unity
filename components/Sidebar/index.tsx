@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Item from './Item';
 import * as Ionic from 'react-icons/io5';
+import { useContext, useState } from 'react';
+import { CollapseContext } from '../../context/CollapseContext';
 
 
 
@@ -86,23 +88,25 @@ const sidebarData:barDataType = {
 
 type SidebarProps = {
     name: string,
-    collapse: boolean,
     collapseHandler: () => void,
-    linkClicked: () => void,
     mobileMenuClose?: () => void,
 }
 
-const SideBar = ({collapseHandler, name, collapse, mobileMenuClose, linkClicked}:SidebarProps ) => {
+const SideBar = ({collapseHandler, name, mobileMenuClose}:SidebarProps ) => {
 
     const simpleMenu = <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 7a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 13a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>;
     
+    const [collapse, setCollapse] = useContext<any>(CollapseContext);
+    
+    console.log("collapse", collapse);
+
     return (
         <div className={`h-full flex flex-col justify-between`}>
 
             <div className="w-full">
                 {/* ********* Sidebar Header ************ */}
                 <div className="relative w-full flex items-center p-4 md:p-3">
-                    <div className={`${collapse ? 'hidden' : 'block'}`}>
+                    <div className={`${ collapse ? 'hidden' : 'block'}`}>
                         <Image src="/logo.svg" width="176" height="47" alt="Logo"/>
                     </div>
                     <i onClick={collapseHandler} className="text-4xl cursor-pointer hidden md:block lg:hidden">{simpleMenu}</i>
@@ -123,7 +127,7 @@ const SideBar = ({collapseHandler, name, collapse, mobileMenuClose, linkClicked}
                     </h1>
                     <div className="w-full border-b pb-10">
                         {
-                            sidebarData.admin.map(({name, url, icon}, idx) => <Item key={idx} clicked={linkClicked} show={!collapse} url={url} icon={icon} name={name} />)
+                            sidebarData.admin.map(({name, url, icon}, idx) => <Item key={idx}  url={url} icon={icon} name={name} />)
                         }
                     </div>
 
@@ -133,7 +137,7 @@ const SideBar = ({collapseHandler, name, collapse, mobileMenuClose, linkClicked}
                     
                     <div className="w-full">
                         {
-                            sidebarData.insight.map(({name, url, icon, badge}, idx) => <Item key={idx} clicked={linkClicked} show={!collapse} url={url} icon={icon} name={name} badge={badge} />)
+                            sidebarData.insight.map(({name, url, icon, badge}, idx) => <Item key={idx} url={url} icon={icon} name={name} badge={badge} />)
                         }
                     </div>
                 </div>
@@ -163,7 +167,7 @@ const SideBar = ({collapseHandler, name, collapse, mobileMenuClose, linkClicked}
                     </div>
                 </div>
             </div>
-            <style jsx>{`
+            {/* <style jsx>{`
                 .parent-shadow:after{
                     content: " ";
                     position:absolute;
@@ -179,7 +183,7 @@ const SideBar = ({collapseHandler, name, collapse, mobileMenuClose, linkClicked}
                     -webkit-box-shadow: 0px 5px 4px #888;
                     box-shadow: 0px 5px 2px #888;
                   }
-            `}</style>
+            `}</style> */}
         </div>
     )
 };
