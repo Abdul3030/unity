@@ -35,7 +35,7 @@ return (
         </div>
         <div className="w-full py-5">
             {
-                itemData.map((item, idx) => <ProgressItem key={idx} collapse={collapse} name={item.name} subname={item.subname} amount={item.amount} />)
+                itemData.map((item, idx) => <ProgressItem key={idx} collapse={collapse} index={idx} name={item.name} subname={item.subname} amount={item.amount} />)
             }
         </div>
         <button className="w-full rounded-xl bg-black hover:bg-unity-purple py-5 font-medium  text-center text-white">

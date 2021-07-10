@@ -15,12 +15,12 @@ import MobileNav from '../components/MobileNav';
 
 export default function Home() {
 
-  const [collapse, setCollapse] = useState(true);
+  const isTablet = useMediaQuery({minWidth: 768, maxWidth: 1023}, undefined, (match) => match ? setCollapse(true) : setCollapse(false));
+
+  const [collapse, setCollapse] = useState(isTablet ? true : false);
   const [mobileMenu, setMobileMenu] = useState(false);
 
   
-  const isDesktop = useMediaQuery({maxWidth: 1024});
-
   const sideBarCollapseHandler = () => {
         setCollapse(!collapse);
     };
@@ -28,8 +28,7 @@ export default function Home() {
         setMobileMenu(!mobileMenu);
   };
 
-  const isTablet = useMediaQuery({minWidth: 768, maxWidth: 1023}, undefined, (match) => match ? setCollapse(true) : setCollapse(false));
-
+  
   console.log(collapse);
   return (
     <div className="w-full flex flex-col md:flex-row bg-white">
