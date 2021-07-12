@@ -12,6 +12,12 @@ type SummaryChartType = {
 const SummaryCahrt = () => {
 
     const [tooltip, setTooltip] = useState<string>('');
+    const [coordinate, setCoordinate] = useState<{x: number, y: number}>();
+
+
+    const coordinateHandler = (props: any) => {
+        setCoordinate({x: props.x - 22.5 , y: props.y - 30});
+    };
 
     const amountShortner = (amount: any ) => {
         if(amount >= 1000 && amount < 1000000) return ((amount / 1000) + 'k')
@@ -66,10 +72,10 @@ return (
                                 axisLine={false}
                                 tickLine={false} 
                                     />
-                            <Bar dataKey="uv" legendType="line" fill="#A0D7E7" barSize={5} radius={5} onMouseOver={() => setTooltip('uv')} />
-                            <Bar dataKey="pv" fill="#FFFFFF" barSize={5} radius={5} onMouseOver={(props) => {setTooltip('pv'); console.log(props)}} />
-                            <Bar dataKey="ex" fill="#FFFFFF" barSize={5} radius={5} onMouseOver={() => setTooltip('ex')} />
-                            <Tooltip cursor={false} content={<CustomTooltip tooltip={tooltip} />} />
+                            <Bar dataKey="uv" legendType="line" fill="#A0D7E7" barSize={5} radius={5} onMouseOver={(props) => {setTooltip('uv'); coordinateHandler(props)}} />
+                            <Bar dataKey="pv" fill="#FFFFFF" barSize={5} radius={5} onMouseOver={(props) => {setTooltip('pv'); coordinateHandler(props)}} />
+                            <Bar dataKey="ex" fill="#FFFFFF" barSize={5} radius={5} onMouseOver={(props) => {setTooltip('ex'); coordinateHandler(props)}} />
+                            <Tooltip position={coordinate} cursor={false} content={<CustomTooltip tooltip={tooltip} />} />
                             </BarChart>
                         </ResponsiveContainer>
     </>

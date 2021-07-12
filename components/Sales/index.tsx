@@ -47,7 +47,8 @@ return (
                 collapse={collapse}
                 name={name} 
                 subname={subname} 
-                amount={amount} 
+                amount={amount}
+                index={idx}
                 />)
            }
         </div>
