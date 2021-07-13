@@ -30,6 +30,12 @@ const data:dataType[] = [
 const Affiliate = () => {
     
     const [tooltip, setTooltip] = useState<string>('');
+    const [coordinate, setCoordinate] = useState<{x: number, y: number}>();
+
+
+    const coordinateHandler = (props: any) => {
+        setCoordinate({x: props.x - 27 , y: props.y - 30});
+    };
     
     return (
         <div className="w-full p-5 shadow-md rounded-2xl">
@@ -60,9 +66,9 @@ const Affiliate = () => {
                     axisLine={false}
                     tickLine={false}
                          />
-                    <Tooltip cursor={false} content={<CustomTooltip tooltip={tooltip} />}  />
-                    <Bar dataKey="pv" fill="#6C5DD3" onMouseOver={() => setTooltip('pv')} />
-                    <Bar dataKey="uv" fill="#A0D7E7" onMouseOver={() => setTooltip('uv')} />
+                    <Tooltip cursor={false} position={coordinate}  content={<CustomTooltip tooltip={tooltip} />}  />
+                    <Bar dataKey="pv" fill="#6C5DD3" onMouseOver={(props) => {setTooltip('pv'); coordinateHandler(props)}} />
+                    <Bar dataKey="uv" fill="#A0D7E7" onMouseOver={(props) => {setTooltip('uv'); coordinateHandler(props)}} />
                     </BarChart>
                 </ResponsiveContainer>
             </div>

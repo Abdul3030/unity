@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Item from './Item';
 import * as Ionic from 'react-icons/io5';
+import {HiMenuAlt4} from 'react-icons/hi';
 import { useContext, useState } from 'react';
 import { CollapseContext } from '../../context/CollapseContext';
 
@@ -94,11 +95,8 @@ type SidebarProps = {
 
 const SideBar = ({collapseHandler, name, mobileMenuClose}:SidebarProps ) => {
 
-    const simpleMenu = <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 7a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 13a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>;
-    
     const [collapse, setCollapse] = useContext<any>(CollapseContext);
     
-    console.log("collapse", collapse);
 
     return (
         <div className={`h-full flex flex-col justify-between`}>
@@ -109,7 +107,7 @@ const SideBar = ({collapseHandler, name, mobileMenuClose}:SidebarProps ) => {
                     <div className={`${ collapse ? 'hidden' : 'block'}`}>
                         <Image src="/logo.svg" width="176" height="47" alt="Logo"/>
                     </div>
-                    <i onClick={collapseHandler} className="text-4xl cursor-pointer hidden md:block lg:hidden">{simpleMenu}</i>
+                    <i onClick={collapseHandler} className="text-4xl cursor-pointer hidden md:block lg:hidden"><HiMenuAlt4/></i>
                     <div onClick={mobileMenuClose} className="md:hidden absolute right-2 text-unity-orange top-2 text-5xl">&times;</div>
                 </div>
                 <div className="w-full flex flex-col justify-center">

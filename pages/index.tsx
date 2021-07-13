@@ -42,11 +42,11 @@ export default function Home() {
   console.log(collapse);
   return (
     <div className="w-full flex flex-col md:flex-row bg-white">
-      <div className="w-full md:hidden">
+      <div className={`w-full  md:hidden`}>
         <MobileNav notificationCount={10} openMenu={mobileMenuHandler} />
       </div>
-      <div onClick={mobileMenuHandler} className={`fixed transition-width duration-500 ease-out overflow-y-scroll z-30 top-0 left-0 bg-gray-500 bg-opacity-50 overflow-hidden md:hidden ${mobileMenu ? 'block w-full' : 'hidden w-0' }`}>
-        <div onClick={(e) => e.stopPropagation()} className={`bg-white px-1 max-h-screen ${mobileMenu ? 'w-72' : 'w-0'} h-auto overflow-scroll z-40 transition-width duration-700 ease-in-out`}>
+      <div onClick={mobileMenuHandler} className={`fixed overflow-y-scroll z-30 top-0 left-0 bg-gray-500 bg-opacity-50 overflow-hidden transition-width duration-500 ease md:hidden ${mobileMenu ? 'w-full' : 'w-0' }`}>
+        <div onClick={(e) => e.stopPropagation()} className={`bg-white px-1 max-h-screen w-72 h-auto overflow-scroll z-40`}>
           <SideBar name="Tam Tran" mobileMenuClose={mobileMenuHandler} collapseHandler={mobileMenuHandler}  />
         </div>
       </div>

@@ -16,7 +16,7 @@ const SummaryCahrt = () => {
 
 
     const coordinateHandler = (props: any) => {
-        setCoordinate({x: props.x - 22.5 , y: props.y - 30});
+        setCoordinate({x: props.x - 20 , y: props.y - 30});
     };
 
     const amountShortner = (amount: any ) => {

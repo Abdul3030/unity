@@ -30,6 +30,12 @@ const data:dataType[] = [
 const Income = () => {
 
     const [tooltip, setTooltip] = useState<string>('');
+    const [coordinate, setCoordinate] = useState<{x: number, y: number}>();
+
+
+    const coordinateHandler = (props: any) => {
+        setCoordinate({x: props.x - 17 , y: props.y - 30});
+    };
     
 return (
     <div className="w-full shadow-md rounded-3xl p-3 bg-unity-purple">
@@ -64,9 +70,9 @@ return (
                     axisLine={false}
                     tickLine={false} 
                          />
-                <Tooltip cursor={false} content={<CustomTooltip tooltip={tooltip} />}  />
-                <Bar dataKey="pv" fill="#6C5DD3" onMouseOver={() => setTooltip('pv')} />
-                <Bar dataKey="uv" fill="#A0D7E7" onMouseOver={() => setTooltip('uv')} />
+                <Tooltip position={coordinate} cursor={false} content={<CustomTooltip  tooltip={tooltip} />}  />
+                <Bar dataKey="pv" fill="#6C5DD3" onMouseOver={(props) => {setTooltip('pv'); coordinateHandler(props)}} />
+                <Bar dataKey="uv" fill="#A0D7E7" onMouseOver={(props) => {setTooltip('uv'); coordinateHandler(props)}} />
                 </BarChart>
             </ResponsiveContainer>
             <button className="w-full rounded-xl bg-black hover:bg-unity-purple py-5 font-medium  text-center text-white">
